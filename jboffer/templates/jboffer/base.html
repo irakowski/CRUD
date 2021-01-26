@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Land a Job!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'jboffer/style.css' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth" style="margin-top:15px">
+          
+          <aside class="menu">
+            <div class="buttons are-normal">
+              <button class="button is-fullwidth is-link is-inverted is-outlined">
+                <span class="icon">
+                  <i class="fas fa-plus-circle"></i>
+                </span>
+                <a href="{% url 'create-company' %}"><span>Add Company</span></a>
+              </button>
+              <button class="button is-fullwidth is-link is-inverted is-outlined">
+                <span class="icon">
+                  <i class="fas fa-user-tie"></i>
+                </span>
+                <a href="{% url 'create-application' %}"><span>New Application</span></a>
+              </button>
+              <button class="button is-fullwidth is-link is-inverted is-outlined">
+                <span class="icon">
+                  <i class="fas fa-address-card"></i>
+                </span>
+                <span>Add Job offer</span>
+              </button>
+              <button class="button is-fullwidth is-link is-inverted is-outlined">
+                <span class="icon">
+                  <i class="fas fa-chart-pie"></i>
+                </span>
+                <span>View Statistic</span>
+              </button>
+            </div>
+          </aside>
+        </div>
+        <div class="column">
+          <div class="card glass">
+            <header class="card-header">
+              <p class="card-header-title">
+                MyApplication
+              </p>
+              <a href="#" class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                Data Analyst for Company
+                <br>
+                <a href="#">#python</a> <a href="#">#SQL</a>
+                <br>
+                <time datetime="2016-1-1">11:09 PM - 1 Jan 2021</time>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-success-dark">
+                  <i class="fas fa-check"></i></span>
+                  </a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-warning-dark">
+                  <i class="fas fa-pencil-alt"></i>
+                  </span></a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-danger-dark">
+                  <i class="fas fa-trash"></i>
+                </span></a>
+            </footer>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card glass">
+            <header class="card-header">
+              <p class="card-header-title">
+                MyApplication
+              </p>
+              <a href="#" class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                React Developer for Company
+                <br>
+                <a href="#">#reactjs</a> <a href="#">#frontend</a>
+                <br>
+                <time datetime="2016-1-1">11:09 PM - 1 Jan 2021</time>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-success-dark">
+                  <i class="fas fa-check"></i></span>
+                  </a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-warning-dark">
+                  <i class="fas fa-pencil-alt"></i>
+                  </span></a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-danger-dark">
+                  <i class="fas fa-trash"></i>
+                </span></a>
+            </footer>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="card glass">
+            <header class="card-header">
+              <p class="card-header-title">
+                MyApplication
+              </p>
+              <a href="#" class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                Python Developer for Company
+                <br>
+                <a href="#">#python</a> <a href="#">#backend</a>
+                <br>
+                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-success-dark">
+                  <i class="fas fa-check"></i></span>
+                  </a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-warning-dark">
+                  <i class="fas fa-pencil-alt"></i>
+                  </span></a>
+              <a href="#" class="card-footer-item">
+                <span class="icon has-text-danger-dark">
+                  <i class="fas fa-trash"></i>
+                </span></a>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </section>
+  
+  <section class="section" style="padding-top: 0rem;">
+    <div class="container">
+      <div class="columns">
+          <div class="column mt-0">
+            <button class="button is-fullwidth is-link is-inverted is-outlined mb-1">
+              <span class="icon">
+                <i class="fas fa-folder-open"></i>
+              </span>
+              <span>Companies</span>
+            </button>
+            <div class="table-container">
+              <table class="table is-fullwidth glass">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>1</th>
+                      <td>Data</td>
+                      <td>Data</td>
+                      <td>Data</td>
+                    </tr>
+                    <tr>
+                      <th>2</th>
+                      <td>Data</td>
+                      <td>Data</td>
+                      <td>Data</td>
+                    </tr>
+                    <tr>
+                      <th>3</th>
+                      <td>Data</td>
+                      <td>Data</td>
+                      <td>Data</td>
+                    </tr>
+                    <tr>
+                      <th>4</th>
+                      <td>Data</td>
+                      <td>Data</td>
+                      <td>Data</td>
+                    </tr>
+                    <tr>
+                      <th>5</th>
+                      <td>Data</td>
+                      <td>Data</td>
+                      <td>Data</td>
+                    </tr>
+                      </tbody>
+                    </table>
+                  </div></div>
+              <div class="column">
+                <button class="button is-fullwidth is-link is-inverted is-outlined mb-1">
+                  <span class="icon">
+                    <i class="fas fa-book"></i>
+                  </span>
+                  <span>Job offers</span>
+                </button>
+                <div class="table-container">
+                <table class="table is-fullwidth glass">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Header</th>
+                          <th>Header</th>
+                          <th>Header</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>1</th>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <th>4</th>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data</td>
+                        </tr>
+                        <tr>
+                          <th>5</th>
+                          <td>Data</td>
+                          <td>Data</td>
+                          <td>Data</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </body>
+  <!--<a href="https://www.freepik.com/photos/vintage">Vintage photo created by benzoix - www.freepik.com</a>--
+    <a href='https://www.freepik.com/photos/background'>Background photo created by user3802032 - www.freepik.com</a>
+    <a href="https://www.freepik.com/photos/background">Background photo created by kjpargeter - www.freepik.com</a>
+    <a href='https://www.freepik.com/photos/background'>Background photo created by kjpargeter - www.freepik.com</a>>
+  -->
+    </html>
