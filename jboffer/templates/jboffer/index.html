@@ -132,45 +132,24 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>URL</th>
                   </tr>
                   </thead>
                   <tbody>
+                    {% for company in companies%}
                     <tr>
-                      <th>1</th>
-                      <td>Data</td>
-                      <td>Data</td>
-                      <td>Data</td>
+                      <th>{{forloop.counter}}</th>
+                      <td>{{company.name}}</td>
+                      <td>{{company.email}}</td>
+                      <td><a href="{{company.url}}"><span class="has-text-danger-light">{{company.url}}</span></a></td>
                     </tr>
-                    <tr>
-                      <th>2</th>
-                      <td>Data</td>
-                      <td>Data</td>
-                      <td>Data</td>
-                    </tr>
-                    <tr>
-                      <th>3</th>
-                      <td>Data</td>
-                      <td>Data</td>
-                      <td>Data</td>
-                    </tr>
-                    <tr>
-                      <th>4</th>
-                      <td>Data</td>
-                      <td>Data</td>
-                      <td>Data</td>
-                    </tr>
-                    <tr>
-                      <th>5</th>
-                      <td>Data</td>
-                      <td>Data</td>
-                      <td>Data</td>
-                    </tr>
-                      </tbody>
-                    </table>
-                  </div></div>
+                    {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+          </div>
               <div class="column">
                 <button class="button is-fullwidth is-link is-inverted is-outlined mb-1">
                   <span class="icon">
