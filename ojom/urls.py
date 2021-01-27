@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from jboffer import views as general_views
@@ -24,5 +26,8 @@ urlpatterns = [
     path('application/update/<int:id>', general_views.UpdateApplication.as_view(), name='update-application'),
     path('application/delete/<int:id>', general_views.DeleteApplication.as_view(), name='delete-application'),
     path('company/new', general_views.CreateCompany.as_view(), name='create-company'),
+    path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
     path('admin/', admin.site.urls),
-]
+
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
