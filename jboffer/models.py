@@ -2,18 +2,31 @@ from datetime import date
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
+
 
 class Company(models.Model):
     name = models.CharField(max_length=150)
-    company_url = models.CharField(max_length=255, blank=True)
-    logo = models.ImageField(upload_to='company_logos/', blank=True)
-    contact = models.CharField(max_length=100, blank=True)
+    url = models.CharField(max_length=255, blank=True)
+    logo = models.ImageField(upload_to='company_logos/', blank=True, default='company_logos/cmp.png')
+    address = models.CharField(max_length=128, blank=True)
+    email = models.EmailField(max_length=128, blank=True)
 
     def __str__(self):
         return self.name
 
-    #def get_absolute_url(self):
-    #    return reverse('company-details', kwargs={'pk': self.pk})
+    def save(self):
+        super().save()
+
+        img = Image.open(self.logo.path)
+
+        if img.height > 150 or img.width > 150:
+            output_size = (150, 150)
+            img.thumbnail(output_size)
+            img.save(self.logo.path)
+    
+    def get_absolute_url(self):
+        return reverse('company-list')
 
 class MyApplication(models.Model):
     
@@ -21,10 +34,10 @@ class MyApplication(models.Model):
         INDEPENDENT = 'INDEP', _('Independent')
         ASSOCIATED = 'ASSOC', _('Associated')
     
-    application_type = models.CharField(max_length=5,choices=ApplicationType.choices)
+    application_type = models.CharField(max_length=5,choices=ApplicationType.choices, default=ApplicationType.INDEPENDENT)
     applied_to = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
     applied_on = models.DateField(auto_now_add=True)
-    updated_on = models.DateField(default=date.today)
+    updated_on = models.DateField(auto_now=True)
     attachment = models.FileField(blank=True, upload_to='cv_uploads/')
     comments = models.TextField(blank=True)
     cover_letter = models.TextField(blank=True)
