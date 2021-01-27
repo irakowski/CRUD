@@ -1,55 +1,6 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Land a Job!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="{% static 'jboffer/style.css' %}">
-    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-  </head>
-  <body>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-one-fifth" style="margin-top:15px">
-          
-          <aside class="menu">
-            <div class="buttons are-normal">
-              <button class="button is-fullwidth is-link is-inverted is-outlined">
-                <span class="icon">
-                  <i class="fas fa-plus-circle"></i>
-                </span>
-                <span>Add Company  </span>
-              </button>
-              <button class="button is-fullwidth is-link is-inverted is-outlined">
-                <span class="icon">
-                  <i class="fas fa-user-tie"></i>
-                </span>
-                <span>New Application  </span>
-              </button>
-              <button class="button is-fullwidth is-link is-inverted is-outlined">
-                <span class="icon">
-                  <i class="fas fa-address-card"></i>
-                </span>
-                <span>Add Job offer</span>
-              </button>
-              <button class="button is-fullwidth is-link is-inverted is-outlined">
-                <span class="icon">
-                  <i class="fas fa-chart-pie"></i>
-                </span>
-                <span>View Statistic</span>
-              </button>
-              <button class="button is-fullwidth is-link is-inverted is-outlined">
-                <span class="icon">
-                  <i class="fas fa-undo"></i>
-                </span>
-                <a href="{% url 'landing-page' %}"><span>Return Home</span></a>
-              </button>
-            </div>
-          </aside>
-        </div>
+{% extends 'jboffer/base.html' %}
+
+{% block content%}
         <div class="column">
           <div class="card glass">
             <header class="card-header has-text-centered">
@@ -79,22 +30,13 @@
               </button>
               <button class="button is-danger is-light card-footer-item" type="submit">
                 <span class="icon has-text-danger-dark">
-                  <i class="fas fa-trash"></i>Discard</span>
+                  <i class="fas fa-trash"></i> Discard</span>
             </footer>
           </div>
         </div>
       </form>
-
- 
-        </div>
+      </div>
       </div>
     </div>
-    
   </section>
-  </body>
-  <!--<a href="https://www.freepik.com/photos/vintage">Vintage photo created by benzoix - www.freepik.com</a>--
-    <a href='https://www.freepik.com/photos/background'>Background photo created by user3802032 - www.freepik.com</a>
-    <a href="https://www.freepik.com/photos/background">Background photo created by kjpargeter - www.freepik.com</a>
-    <a href='https://www.freepik.com/photos/background'>Background photo created by kjpargeter - www.freepik.com</a>>
-  -->
-    </html>
+{% endblock %}

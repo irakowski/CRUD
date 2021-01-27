@@ -1,0 +1,31 @@
+{% extends 'jboffer/base.html' %}
+{% block content %}
+<div class="column">
+        {% for company in companies %}
+        <article class="is-dark mt-2">
+            <div class="card glass">
+                <div class="card-content glass">
+                  <div class="media columns is-vcentered">
+                    <div class="media-left">
+                      <div class="image is-64x64px">
+                        {% if company.logo %}
+                        <img src="{{company.logo.url}}" alt="Place image" width="64px" height="64px">
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="media-content">
+                      <p class="title is-4">{{company.name}}</p>
+                      <p class="subtitle is-6">{{company.email}}</p>
+                      <p>{{company.address}} <a href="{{company.url}}">{{company.url}}</a></p>
+                    </div>
+                  </div>
+              
+                </div>
+              </div>
+        {% empty %}
+            <p>No companies yet</p>
+        {% endfor %} 
+</div>
+
+
+{% endblock %}

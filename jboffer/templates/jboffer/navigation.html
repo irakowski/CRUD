@@ -1,0 +1,36 @@
+<aside class="menu">
+  <div class="buttons are-normal">
+    <button class="button is-fullwidth is-link is-inverted is-outlined">
+      <span class="icon">
+        <i class="fas fa-plus-circle"></i>
+      </span>
+      <a href="{% url 'create-company' %}"><span>Add Company</span></a>
+    </button>
+    <button class="button is-fullwidth is-link is-inverted is-outlined">
+      <span class="icon">
+        <i class="fas fa-user-tie"></i>
+      </span>
+      <a href="{% url 'create-application' %}"><span>New Application</span></a>
+    </button>
+    <button class="button is-fullwidth is-link is-inverted is-outlined">
+      <span class="icon">
+        <i class="fas fa-address-card"></i>
+      </span>
+      <span>Add Job offer</span>
+    </button>
+    <button class="button is-fullwidth is-link is-inverted is-outlined">
+      <span class="icon">
+        <i class="fas fa-chart-pie"></i>
+      </span>
+      <span>View Statistic</span>
+    </button>
+    {% if request.path != '/' %}
+    <button class="button is-fullwidth is-link is-inverted is-outlined">
+      <span class="icon">
+        <i class="fas fa-undo"></i>
+      </span>
+      <a href="{% url 'landing-page' %}"><span>Return Home</span></a>
+    </button>
+  {% endif %}
+  </div>
+</aside>
