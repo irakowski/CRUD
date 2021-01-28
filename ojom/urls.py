@@ -27,6 +27,7 @@ urlpatterns = [
     path('application/delete/<int:id>', general_views.DeleteApplication.as_view(), name='delete-application'),
     path('company/new', general_views.CreateCompany.as_view(), name='create-company'),
     path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
+    path('application/<str:tag>', general_views.ApplicationsByTag.as_view(), name='app-tags'),
     path('admin/', admin.site.urls),
 
     
