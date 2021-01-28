@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from . import models
+from . import forms
 # Create your views here.
 
 ##HTML Rendering
@@ -14,19 +16,81 @@ class LandingPage(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['companies'] = models.Company.objects.all().order_by('-id')[:5]
+        context['companies'] = models.Company.objects.order_by('-id')[:5]
+        context['apps'] = models.MyApplication.objects.order_by('-id')[:3]
         return context
 
 
-class ApplicationView(generic.TemplateView):
+class ApplicationView(generic.DetailView):
     ...
 
-class CreateApplication(generic.CreateView):
-    
-    model = models.MyApplication
+
+
+class CreateApplication(generic.TemplateView):
+    """
+    Renders form to create record in application table and 
+    create tag record in ApplicationTags table associated with given application
+    """
     template_name = 'jboffer/forms/application_create_form.html'
-    fields = ['application_type', 'applied_to', 'attachment', 'comments', 'cover_letter' ]
-    
+    success_url = reverse_lazy('landing-page')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = forms.ApplicationForm()
+        context['tag_form'] = forms.TagForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate two form instances: 
+        - Form for creating Application  
+        - Form for creating tags
+        Saves application instance along with associated tags.
+        """
+        form = forms.ApplicationForm(self.request.POST, self.request.FILES)
+        tag_form = forms.TagForm(self.request.POST)
+        if form.is_valid() and tag_form.is_valid():
+            return self.form_valid(form, tag_form)
+        else:
+            return self.form_invalid(form, tag_form)
+
+    def form_valid(self, form, tag_form):
+        """If the form is valid, redirect to the supplied URL."""
+        application = form.save()
+        tags = tag_form.cleaned_data.get('name')
+        tags = tags.split()
+        ###Get the names of previously created tags
+        prev_tags = list(models.ApplicationTag.objects.values_list('name', flat=True))
+        for tag in tags:
+            if tag.lower().startswith('#'):
+                tag = tag.lower()[1:]
+            else:
+                tag = tag.lower()
+            if tag in prev_tags:
+                ##adding application to the available tag
+                application.tags.add(models.ApplicationTag.objects.get(name=tag))
+            else:
+                #creating new tag
+                application.tags.create(name=tag)
+        application.save()
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, form, tag_form):
+        return self.render_to_response(self.get_context_data())
+
+
+class ApplicationsByTag(generic.View):
+    """ 
+    Filter applications based on selected tag
+    Render list of application associated with given tag
+    """        
+    def get(self, request, tag):
+        context = {}
+        context['tag'] = tag
+        context['apps'] = models.MyApplication.objects.filter(tags__name=tag)
+        return render(self.request, 'jboffer/lists/apps_by_tag.html', context)
+
+
 
 class UpdateApplication(generic.TemplateView):
     ...
