@@ -1,0 +1,71 @@
+{% extends 'jboffer/base.html' %}
+{% block content %}
+<div class="column">
+  <p class="has-text-white title">#{{tag}}</p>
+  {% for app in apps %}
+
+    <article class="is-dark mt-2">
+      <div class="card glass">
+        <div class="card-content glass">
+          <div class="media columns is-vcentered">
+            <div class="media-left">
+              <div>
+                <img src="{{app.applied_to.logo.url}}" alt="Place image" width="150" height="150">
+              </div>
+            </div>
+            <div>
+              <p><strong>Application type: {{ app.get_application_type_display }}</strong></p>
+              <p>Company: {{ app.applied_to.name }}</p>
+              <p>Position: {{ app.position }} </p>
+              <a href="{{app.applied_to.url}}">{{app.applied_to.url}}</a>
+            </div>
+            <div class="ml-6">
+              <legend><strong>Application Details</strong></legend>
+              <p>Applied On: {{ app.applied_on }}</p>
+              <p>{{ app.comments }}</p>
+              <p>{{ app.application_response|yesno:"Response, No Response Recieved" }}</p>
+              <p><a href="">See more details</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  {% empty %}
+    <p>No companies yet</p>
+  {% endfor %}
+  {% if is_paginated %}
+    <div class="buttons has-addons mt-3 is-centered">
+    {% if page_obj.has_previous %}
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page=1"><span class="has-text-grey">First</span></a>
+      </button>
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page={{ page_obj.previous_page_number }}">
+          <span class="has-text-grey">Previous</span></a>
+      </button>
+    
+    {% endif%}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page={{ num }}"><span class="has-text-grey">{{ num }}</span></a></button>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page={{ num }}"><span class="has-text-grey">{{ num }}</span></a></button>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page={{ page_obj.next_page_number }}"><span class="has-text-grey">Next</span>
+        </a></button>
+      <button class="button is-link is-inverted is-outlined">
+        <a href="?page={{ page_obj.paginator.num_pages }}"><span class="has-text-grey">Last</span></a></button>
+    {% endif%}
+  </div>
+{% endif%}
+</div>
+
+
+{% endblock %}
