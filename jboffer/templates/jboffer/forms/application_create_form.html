@@ -1,4 +1,5 @@
 {% extends 'jboffer/base.html' %}
+{% load static %}
 {% block content %}
         <div class="column">
           <div class="card glass">
@@ -13,23 +14,67 @@
               </a>
             </header>
             <div class="card-content glass">
-             <form>
+             <form method="POST" action="" enctype="multipart/form-data">
               <div class="content">
                   {% csrf_token %}
                   <table>
-
-                    {{form.as_table}}
+                    <tbody>
+                      <tr>
+                        <th>{{ form.application_type.label_tag }}</th>
+                        <td>{{ form.application_type }}</td>
+                      </tr>
+                      <tr>
+                        <th>{{ form.applied_to.label_tag }}</th>
+                        <td>{{ form.applied_to }}</td>
+                      </tr>
+                      <tr>
+                        <th>{{ form.position.label_tag }}</th>
+                        <td>{{ form.position }}</td>
+                      </tr>
+                      <tr>
+                         <th>{{ tag_form.name.label_tag }}</th>
+                         <td>{{ tag_form.name }}   
+                          <!--<button type="submit" class="button is-small is-success is-outlined">
+                          <span class="icon is-small">
+                            <i class="fas fa-check"></i>
+                          </span></td> -->                       
+                      </tr>
+                      <tr>
+                        <th>
+                          <button class="button is-info is-inverted is-outlined" id="save_cv">
+                            <span class="has-text-black">Save CV</span>
+                          </button>
+                        </th>
+                        <td id="save_cv_field" hidden="">{{ form.attachment }}</td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <button class="button is-info is-inverted is-outlined" id="cover_letter">
+                            <span class="has-text-black">Add Cover Later</span>
+                          </button>
+                        </th>
+                        <td id="save_cover_field" hidden="">{{ form.cover_letter }}</td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <button class="button is-info is-inverted is-outlined" id="comment">
+                            <span class="has-text-black">Leave a Comment</span>
+                          </button>
+                        </th>
+                        <td id="save_comment_field" hidden="">{{ form.comments }}</td>
+                      </tr>
+                    </tbody>
                   </table>
               </div>
             </div>
             <footer class="card-footer">
-              <a href="#" class="card-footer-item">
-                <span class="icon has-text-success-dark">
+              <button class="button is-primary is-light card-footer-item" type="submit">
+                  <span class="icon has-text-success-dark">
                   <i class="fas fa-check"></i>Save</span>
-                  </a>
-              <a href="#" class="card-footer-item">
+              </button>
+              <button class="button is-danger is-light card-footer-item" type="submit">
                 <span class="icon has-text-danger-dark">
-                  <i class="fas fa-trash"></i>Discard</span></a>
+                  <i class="fas fa-trash"></i> Discard</span>
             </footer>
           </div>
         </div>
@@ -41,4 +86,8 @@
     </div>
     
   </section>
+{% endblock %}
+
+{% block script%}
+    <script src="{% static 'jboffer/app.js' %}"></script>
 {% endblock %}
