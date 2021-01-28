@@ -35,22 +35,29 @@ class MyApplication(models.Model):
         ASSOCIATED = 'ASSOC', _('Associated')
     
     application_type = models.CharField(max_length=5,choices=ApplicationType.choices, default=ApplicationType.INDEPENDENT)
-    applied_to = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
-    applied_on = models.DateField(auto_now_add=True)
+    applied_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
+    applied_to = models.ForeignKey(Company, on_delete=models.CASCADE, default='Select a company name', null=True)
+    position = models.CharField(max_length=128, null=True, blank=True, default = None)
     attachment = models.FileField(blank=True, upload_to='cv_uploads/')
-    comments = models.TextField(blank=True)
+    comments = models.CharField(max_length=255, blank=True)
     cover_letter = models.TextField(blank=True)
     application_response = models.BooleanField(default=False)
     response_content = models.TextField(blank=True)
 
     def __str__(self):
-        return f'{self.position} for {self.applied_to}({self.applied_on})'
+        return f'{self.applied_to}({self.applied_on})'
 
     def get_absolute_url(self):    
-        return reverse('application', args=[str(self.id)])
+        return reverse('landing-page')##, args=[str(self.id)])
 
-    
+class ApplicationTag(models.Model):
+    name = models.CharField(verbose_name='Tags', max_length = 150, db_index=True)
+    applications = models.ManyToManyField(MyApplication, related_name="tags")
+
+    def __str__(self):
+        return self.name
+
 class JobOffer(models.Model):
     short_description = models.CharField(max_length=255)
     offer_pic = models.ImageField(upload_to='scrshots/', blank=True)
