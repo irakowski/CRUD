@@ -1,12 +1,11 @@
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from . import models
 from . import forms
-# Create your views here.
 
-##HTML Rendering
 
 class LandingPage(generic.TemplateView):
     '''
@@ -20,9 +19,14 @@ class LandingPage(generic.TemplateView):
         context['apps'] = models.MyApplication.objects.order_by('-id')[:3]
         return context
 
-
-class ApplicationView(generic.DetailView):
-    ...
+def ajax_update(request, pk):
+    if request.method == "POST"and request.is_ajax():
+        app = models.MyApplication.objects.get(pk=pk)
+        form = forms.ApplicationUpdateForm(request.POST, instance=app)           
+        if form.is_valid():
+            instance = form.save()
+            serialized_instance = serializers.serialize('json', [ instance, ])
+            return HttpResponse(serialized_instance)
 
 
 
@@ -91,14 +95,24 @@ class ApplicationsByTag(generic.View):
         return render(self.request, 'jboffer/lists/apps_by_tag.html', context)
 
 
+class ViewApplication(generic.DetailView):
 
-class UpdateApplication(generic.TemplateView):
-    ...
+    template_name = 'jboffer/forms/application_update_form.html'
+    model = models.MyApplication
+    context_object_name = 'app'
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context['form'] = forms.ApplicationUpdateForm(instance=self.object)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        return ajax_update(self.request)
+        
 
 class DeleteApplication(generic.TemplateView):
     ...
-
-
 
 class CreateCompany(generic.CreateView):
     """
@@ -121,4 +135,3 @@ class CompanyListView(generic.ListView):
     template_name = 'jboffer/lists/company_list.html'
     paginate_by = 4
     ordering = ['-id']
-
