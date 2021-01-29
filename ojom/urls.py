@@ -22,7 +22,7 @@ from jboffer import views as general_views
 urlpatterns = [
     path('', general_views.LandingPage.as_view(), name='landing-page'),     
     path('application/new', general_views.CreateApplication.as_view(), name='create-application'),
-    path('application/<int:pk>', general_views.UpdateApplication.as_view(), name='view-application'),
+    path('application/<int:pk>', general_views.ViewApplication.as_view(), name='view-application'),
     path('application/delete/<int:id>', general_views.DeleteApplication.as_view(), name='delete-application'),
     path('company/new', general_views.CreateCompany.as_view(), name='create-company'),
     path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
