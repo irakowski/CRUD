@@ -12,3 +12,12 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = models.MyApplication
         fields = ['application_type', 'applied_to', 'position', 'attachment', 'comments', 'cover_letter']
+
+
+class ApplicationUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.MyApplication
+        fields = ['comments', 'application_response', 'response_content']
+        widgets = {
+          'response_content': forms.Textarea(attrs={'rows':4, 'cols':25}),
+        }
