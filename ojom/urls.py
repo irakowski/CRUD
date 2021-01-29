@@ -22,12 +22,12 @@ from jboffer import views as general_views
 urlpatterns = [
     path('', general_views.LandingPage.as_view(), name='landing-page'),     
     path('application/new', general_views.CreateApplication.as_view(), name='create-application'),
-    path('application/<int:id>', general_views.ApplicationView.as_view(), name='application-display'),
-    path('application/update/<int:id>', general_views.UpdateApplication.as_view(), name='update-application'),
+    path('application/<int:pk>', general_views.UpdateApplication.as_view(), name='view-application'),
     path('application/delete/<int:id>', general_views.DeleteApplication.as_view(), name='delete-application'),
     path('company/new', general_views.CreateCompany.as_view(), name='create-company'),
     path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
     path('application/<str:tag>', general_views.ApplicationsByTag.as_view(), name='app-tags'),
+    path('ajax/update/<pk>', general_views.ajax_update, name='update-app'),
     path('admin/', admin.site.urls),
 
     
