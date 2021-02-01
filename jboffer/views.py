@@ -19,16 +19,26 @@ class LandingPage(generic.TemplateView):
         context['apps'] = models.MyApplication.objects.order_by('-id')[:3]
         return context
 
+from django.http import JsonResponse
 def ajax_update(request, pk):
     if request.method == "POST"and request.is_ajax():
         app = models.MyApplication.objects.get(pk=pk)
         form = forms.ApplicationUpdateForm(request.POST, instance=app)           
         if form.is_valid():
             instance = form.save()
-            serialized_instance = serializers.serialize('json', [ instance, ])
-            return HttpResponse(serialized_instance)
+            app =list(models.MyApplication.objects.filter(pk=instance.pk).values())
+            return JsonResponse({"status": "success", "app": app }, status=200)
+        else:
+            # some form errors occured.
+            return JsonResponse({"error": form.errors}, status=400)
+    return JsonResponse({"error": ""}, status=400)
 
-
+def ajax_delete(request, pk):
+    if request.method == "POST" and request.is_ajax():
+        app = models.MyApplication.objects.get(pk=pk)
+        app.delete()
+        return JsonResponse({"status": "success"}, status=200)
+    return JsonResponse({"error": form.errors}, status=400)
 
 class CreateApplication(generic.TemplateView):
     """
