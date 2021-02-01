@@ -28,6 +28,7 @@ urlpatterns = [
     path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
     path('application/<str:tag>', general_views.ApplicationsByTag.as_view(), name='app-tags'),
     path('ajax/update/<pk>', general_views.ajax_update, name='update-app'),
+    path('ajax/delete/<pk>', general_views.ajax_delete, name='delete-app'),
     path('admin/', admin.site.urls),
 
     
