@@ -52,7 +52,7 @@ class MyApplication(models.Model):
         return reverse('landing-page')##, args=[str(self.id)])
 
 class ApplicationTag(models.Model):
-    name = models.CharField(verbose_name='Tags', max_length = 150, db_index=True)
+    name = models.CharField(verbose_name='Tags', max_length = 150, db_index=True, unique=True)
     applications = models.ManyToManyField(MyApplication, related_name="tags")
 
     def __str__(self):
