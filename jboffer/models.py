@@ -49,7 +49,7 @@ class MyApplication(models.Model):
         return f'{self.position} for {self.applied_to}'
 
     def get_absolute_url(self):    
-        return reverse('landing-page')##, args=[str(self.id)])
+        return reverse('view-application', args=[str(self.id)])
 
 class ApplicationTag(models.Model):
     name = models.CharField(verbose_name='Tags', max_length = 150, db_index=True, unique=True)
@@ -59,16 +59,13 @@ class ApplicationTag(models.Model):
         return self.name
 
 class JobOffer(models.Model):
-    short_description = models.CharField(max_length=255)
-    offer_pic = models.ImageField(upload_to='scrshots/', blank=True)
-    offer_url = models.CharField(max_length=255, )
-    contact_email = models.EmailField(blank=True)
-    contact_person = models.CharField(max_length=80, blank=True)
-    position = models.CharField(max_length=100)
-    application = models.ForeignKey(MyApplication, on_delete=models.CASCADE)
-    
+    application = models.ForeignKey(MyApplication, on_delete=models.CASCADE, null=True)
+    description = models.TextField(max_length=255, blank=True)
+    snapshot = models.ImageField(upload_to='scrshots/', blank=True)
+    url = models.CharField(max_length=255, blank=True )
+
     def __str__(self):
-        return f'{self.description} {self.offer_url}'
+        return f'{self.application} AD'
 
 
 
