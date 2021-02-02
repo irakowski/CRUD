@@ -24,4 +24,31 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         inputComment.toggleAttribute('hidden');
     });
+
+    const appType = document.getElementById('id_application_type');
+    const desc = document.getElementById('offer-desc');
+    const pic = document.getElementById('offer-pic');
+    const url = document.getElementById('offer-url');
+    if (appType.value === 'ASSOC') {
+        desc.hidden = false;
+        pic.hidden = false;
+        url.hidden = false
+    } else {
+        desc.hidden = true;
+        pic.hidden = true;
+        url.hidden = true  }
+
+    appType.addEventListener('change', function(e) {
+        e.preventDefault();
+        if (appType.value === 'ASSOC') {
+            desc.hidden = false;
+            pic.hidden = false;
+            url.hidden = false
+        } else {
+            desc.hidden = true;
+            pic.hidden = true;
+            url.hidden = true
+        }
+    })
+
 });
