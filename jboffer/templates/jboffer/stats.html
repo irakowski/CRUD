@@ -1,0 +1,44 @@
+{% extends 'jboffer/base.html' %}
+{% block content%}
+<div class="column">
+<div class="level is-fullwidth">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Total Applications</p>
+        <p class="title has-text-white">{{total_applications}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Independent Apply</p>
+        <p class="title has-text-white">{{number_of_indep_apps}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Job Offer submittion</p>
+        <p class="title has-text-white">{{number_of_assoc_apps}}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Replies Received</p>
+          <p class="title has-text-white">{{replies}}</p>
+        </div>
+      </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Number of Companies</p>
+        <p class="title has-text-white">{{companies}}</p>
+      </div>
+    </div>
+</div><hr>
+<div class="has-text-centered">
+    <p class="heading">Submitted Applications in the last 30 days</p>
+    <hr>
+    {% for app in apps%}
+    <a href="{% url 'view-application' app.id%}"><span class="has-text-danger-light">{{app}}</span></a><br>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
