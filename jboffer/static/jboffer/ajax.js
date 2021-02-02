@@ -12,8 +12,13 @@ function update_app(url) {
         // handle a successful response
         success : function(data) {
             $('#edit-form').css("display","none")/// hide the form
-            $('display').html(data)
-            location.reload(); //fetch updated item and render page again
+            console.log(data)
+            $('#comme').html(data.app[0].comments)
+
+
+            $('#response').html(data.app[0].application_response) 
+            $('#response-content').html(data.app[0].response_content)
+            location.reload(); //
         },
 
         // handle a non-successful response
@@ -34,8 +39,7 @@ function delete_app(url) {
 
         // handle a successful response
         success : function(data) {
-            window.location = '/'/// hide the form
-            ; //fetch updated item and render page again
+            window.location = '/'; //redirect to landing page
         },
 
         // handle a non-successful response
@@ -49,13 +53,13 @@ function delete_app(url) {
 
 $('#act-form').on('submit', function(e){
     e.preventDefault();
-    console.log("form submitted!")
+    //console.log("form submitted!")
     update_app($(this).attr("data-href"));
 });
 
 
 $('#del-form').on('submit', function(e){
     e.preventDefault();
-    console.log("sending delete!")
+    //console.log("sending delete!")
     delete_app($(this).attr("data-href"));
 });
