@@ -28,16 +28,16 @@
               </div>
               <div>
                 {% if app.comments %}
-                <p><strong>Comment:</strong> <em>{{ app.comments }}</em></p>
+                <p ><strong>Comment:</strong> <em id="comme">{{ app.comments }}</em></p>
                 {% endif %}
               </div>
               <div>
                 <p><strong>Response to the application:</strong> 
-                  <em>{{ app.application_response|yesno:"Response recieved, No response recieved" }}</em>
+                  <em id="response">{{ app.application_response|yesno:"Response recieved, No response recieved" }}</em>
                 </p>
                 <div>
                 {% if app.application_response %}
-                  <p><strong>Response content:</strong> {{ app.response_content }}</p>
+                  <p><strong>Response content:</strong><span id="response-content">{{ app.response_content }}</span></p>
                 {% endif %}
                 </div>
                 
