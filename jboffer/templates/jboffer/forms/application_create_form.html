@@ -21,11 +21,23 @@
                     <tbody>
                       <tr>
                         <th>{{ form.application_type.label_tag }}</th>
-                        <td>{{ form.application_type }}</td>
+                        <td id="app-type">{{ form.application_type }}</td>
                       </tr>
                       <tr>
                         <th>{{ form.applied_to.label_tag }}</th>
                         <td>{{ form.applied_to }}</td>
+                      </tr>
+                      <tr id="offer-desc" hidden="">
+                        <th>{{offer_form.description.label_tag}}</th>
+                        <td>{{offer_form.description}}</td>
+                      </tr>
+                      <tr id="offer-pic" hidden="">
+                        <th>{{offer_form.snapshot.label_tag}}</th>
+                        <td>{{offer_form.snapshot }}</td>
+                      </tr>
+                      <tr id="offer-url" hidden="">
+                        <th>{{offer_form.url.label_tag}}</th>
+                        <td>{{offer_form.url}}</td>
                       </tr>
                       <tr>
                         <th>{{ form.position.label_tag }}</th>
@@ -33,11 +45,7 @@
                       </tr>
                       <tr>
                          <th>{{ tag_form.name.label_tag }}</th>
-                         <td>{{ tag_form.name }}   
-                          <!--<button type="submit" class="button is-small is-success is-outlined">
-                          <span class="icon is-small">
-                            <i class="fas fa-check"></i>
-                          </span></td> -->                       
+                         <td>{{ tag_form.name }}</td>                      
                       </tr>
                       <tr>
                         <th>
