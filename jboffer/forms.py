@@ -21,3 +21,12 @@ class ApplicationUpdateForm(forms.ModelForm):
         widgets = {
           'response_content': forms.Textarea(attrs={'rows':4, 'cols':25}),
         }
+
+
+class OfferForm(forms.ModelForm):
+    class Meta:
+        model = models.JobOffer
+        fields = ['description', 'snapshot', 'url']
+        widgets = {
+          'description': forms.Textarea(attrs={'rows':4, 'cols':25}),
+        }
