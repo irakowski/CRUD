@@ -14,15 +14,9 @@
     </button>
     <button class="button is-fullwidth is-link is-inverted is-outlined">
       <span class="icon">
-        <i class="fas fa-address-card"></i>
-      </span>
-      <span>Add Job offer</span>
-    </button>
-    <button class="button is-fullwidth is-link is-inverted is-outlined">
-      <span class="icon">
         <i class="fas fa-chart-pie"></i>
       </span>
-      <span>View Statistic</span>
+      <a href="{% url 'stats' %}"><span>View Statistic</span></a>
     </button>
     {% if request.path != '/' %}
     <button class="button is-fullwidth is-link is-inverted is-outlined">
