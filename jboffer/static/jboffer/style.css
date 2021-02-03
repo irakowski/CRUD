@@ -33,3 +33,21 @@ html, body {
     height:50px;
     position: fixed;
 }
+
+img .thumb {
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+
+.crop {
+    height: 300px;
+    width: 400px;
+    overflow: hidden;
+   }
+.crop img {
+    height: auto;
+    width: 400px;
+   }
