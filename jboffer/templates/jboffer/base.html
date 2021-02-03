@@ -17,8 +17,12 @@
           <div class="column is-one-fifth" style="margin-top:15px">
               {% include 'jboffer/navigation.html'%}
           </div>
-        {% block content %}
-        {% endblock %}
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </section>
+    {% block table %} {% endblock %}
     <footer class="my-footer">
       <div class="content has-text-centered">
         <p class="is-size-5">
@@ -29,4 +33,4 @@
     </footer>
     {% block script%}{% endblock %}
   </body>
-  </html>
+</html>

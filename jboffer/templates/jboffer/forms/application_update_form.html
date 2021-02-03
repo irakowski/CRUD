@@ -1,159 +1,47 @@
-{% extends 'jboffer/base.html' %}
-{% load static %}
-{% block content %}
-        <div class="column">
-          <div id="display" class="card glass">
-            <header class="card-header">
-              <p class="card-header-title">
-                {{ app.get_application_type_display}} Application
-              </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <strong class="title is-4">{{ app.position }}</strong><br> 
-                <strong class="subtitle is-4">{{ app.applied_to }}</strong>
-                <br>
-                {% for tag in app.tags.all %}
-                <a href="{% url 'app-tags' tag.name %}">#{{tag}}</a>
-                {% endfor %}
-                <br>
-                <time datetime="{{ app.aplied_on }}"><strong>Applied:</strong> {{ app.applied_on  }} </time>
-                <br>
-                <time datetime="{{ app.aplied_on }}"><strong>Last Update:</strong> {{ app.updated_on  }} </time>
-              </div>
-              <div>
-                {% if app.comments %}
-                <p ><strong>Comment:</strong> <em id="comme">{{ app.comments }}</em></p>
-                {% endif %}
-              </div>
-              <div>
-                <p><strong>Response to the application:</strong> 
-                  <em id="response">{{ app.application_response|yesno:"Response recieved, No response recieved" }}</em>
-                </p>
-                <div>
-                {% if app.application_response %}
-                  <p><strong>Response content:</strong><span id="response-content">{{ app.response_content }}</span></p>
-                {% endif %}
-                </div>
-                
-                <br>
-                
-                {% if app.cover_letter %}
-                <div>
-                  <p><strong>Cover Letter:</strong>
-                  <p>{{ app.cover_letter }}</p>
-                </div>
-                {% endif %}
-                
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a id="show-edit" href="#" class="card-footer-item">
-                <span class="icon has-text-warning-dark">
-                  <i class="fas fa-pencil-alt"></i>
-                  </span></a>
-              <a id="show-delete" href="#" class="card-footer-item">
-                <span class="icon has-text-danger-dark">
-                  <i class="fas fa-trash"></i>
-                </span></a>
-            </footer>
-          </div>
-        </div>
-    {% if app.attachment %}
-    <div id="example1">
-      <object width="400px" height="400px" src="{{ app.attachment.url }}"></object>
-    </div>
-    {% endif %}
-      <div id="edit-form" class="column" style="display: none;">
-        <div class="card glass">
-            <header class="card-header has-text-centered">
-              <p class="card-header-title">
-                Update {{ app }}
-              </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content glass">
-             <form id="act-form" method="POST" data-href="{% url 'update-app' app.id %}" action=""  enctype="multipart/form-data">
-              <div class="content">
-                  {% csrf_token %}
-                  <table>
-                    <tbody>
-                      <tr>
-                        <th>{{ form.comments.label_tag }}</th>
-                        <td>{{ form.comments }}</td>
-                      </tr>
-                      <tr>
-                        <th>Mark as replied to</th>
-                        <td>{{ form.application_response }}</td>
-                      </tr>
-                      <tr>
-                        <th>Response content</th>
-                        <td>{{form.response_content}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <button id="send-form" class="button is-primary is-light card-footer-item" type="submit">
-                  <span class="icon has-text-success-dark">
-                  <i class="fas fa-check"></i>Save</span>
-              </button>
-              <button id="discard-edit" class="button is-danger is-light card-footer-item" type="submit">
-                <span class="icon has-text-danger-dark">
-                  <i class="fas fa-trash"></i> Discard</span>
-            </footer>
-          </form>
+<div id="edit-form" class="column" style="display: none;">
+  <div class="card glass">
+    <header class="card-header has-text-centered">
+      <p class="card-header-title">
+        Update {{ app }}
+      </p>
+      <a href="#" class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <form id="act-form" method="POST" data-href="{% url 'update-app' app.id %}" action=""  enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="card-content glass">
+        <div class="content">
+          <table>
+            <tbody>
+              <tr>
+                <th>{{ form.comments.label_tag }}</th>
+                <td>{{ form.comments }}</td>
+              </tr>
+              <tr>
+                <th>Mark as replied to</th>
+                <td>{{ form.application_response }}</td>
+              </tr>
+              <tr>
+                <th>Response content</th>
+                <td>{{ form.response_content }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      
-      <div id="delete-form" class="column" style="display: none;">
-        <div class="card glass">
-            <header class="card-header has-text-centered">
-              <p class="card-header-title">
-                Delete {{ app }}
-              </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </a>
-            </header>
-            <div class="card-content glass">
-             <form id="del-form" method="POST" data-href="{% url 'delete-app' app.id %}" action="">
-              <div class="content">
-                  {% csrf_token %}
-                  <p>Are you sure you want to delete "{{ object }}"?</p>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <button id="confirm-form" class="button is-primary is-light card-footer-item" type="submit">
-                  <span class="icon has-text-success-dark">
-                  <i class="fas fa-check"></i>Confirm</span>
-              </button>
-              <button id="discard-delete" class="button is-danger is-light card-footer-item">
-                <span class="icon has-text-danger-dark">
-                  <i class="fas fa-trash"></i> Discard</span>
-            </footer>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </div>    
-</section>
-{% endblock %}
-
-{% block script%}
-    <script src="{% static 'jboffer/editform.js' %}"></script>
-    <script src="{% static 'jboffer/ajax.js' %}"></script>
-{% endblock %}
+      <footer class="card-footer">
+        <button id="send-form" class="button is-primary is-light card-footer-item" type="submit">
+          <span class="icon has-text-success-dark">
+          <i class="fas fa-check"></i></span><span>Save</span>
+        </button>
+        <button id="discard-edit" class="button is-danger is-light card-footer-item" type="submit">
+          <span class="icon has-text-danger-dark">
+            <i class="fas fa-times"></i></span><span>Discard</span>
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{% if is_paginated %}
+    <div class="buttons has-addons mt-3 is-centered">
+    {% if page_obj.has_previous %}
+      <a href="?page=1" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">First</span></a>
+
+      <a href="?page={{ page_obj.previous_page_number }}" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">Previous</span></a>
+    {% endif%}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+      <a href="?page={{ num }}" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">{{ num }}</span></a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a href="?page={{ num }}" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">{{ num }}</span></a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">Next</span></a>
+      <a href="?page={{ page_obj.paginator.num_pages }}" class="button is-link is-inverted is-outlined">
+        <span class="has-text-grey">Last</span></a>
+    {% endif%}
+  </div>
+{% endif%}
+</div>

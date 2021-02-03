@@ -1,0 +1,51 @@
+{% extends 'jboffer/base.html' %}
+
+{% block content %}
+<div class="column">
+  <div class="card glass">
+    <header class="card-header">
+      <p class="card-header-title">
+        Job offer
+      </p>
+      <a href="#" class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <strong class="title is-4">{{ offer.application }}</strong><br> 
+        <time datetime=""><strong>Applied:</strong> {{ offer.application.applied_on }} </time>
+      </div>
+      
+      {% if offer.description %}
+      <div class="content">
+        <p><strong>Description:</strong> 
+            <em>{{ offer.description }}</em>
+        </p>
+      </div>
+      {% endif %}
+      
+      <div class="content">
+        <p>
+          <strong>Visit offer:</strong> 
+          <a class="has-text-danger-light" href="{{ offer.url }}">
+              {{ offer.url }}
+          </a>
+        </p>
+      </div>
+       
+      {% if offer.snapshot %}
+      <div class="has-text-centered mt-4">
+        <p>
+          <img src="{{offer.snapshot.url}}">
+        </p>
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+{% endblock %}

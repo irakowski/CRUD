@@ -1,0 +1,92 @@
+{% extends 'jboffer/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="column">
+  <div id="display" class="card glass">
+    <header class="card-header">
+      <p class="card-header-title">
+        {{ app.get_application_type_display }} Application
+      </p>
+      <a href="#" class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <strong class="title is-4">{{ app.position }}</strong><br> 
+        <strong class="subtitle is-4">{{ app.applied_to }}</strong>
+        <p class="mt-3">
+          {% for tag in app.tags.all %}
+          <a href="{% url 'app-tags' tag.name %}">#{{ tag }}</a>
+          {% endfor %}
+        </p>
+      </div>
+      <div class="content">
+          <time datetime="{{ app.aplied_on }}">
+              <strong>Applied:</strong> {{ app.applied_on  }} 
+          </time>
+          <br>
+          <time datetime="{{ app.updated_on }}">
+              <strong>Last Update:</strong> {{ app.updated_on  }} 
+          </time>
+      </div>
+
+      {% if app.comments %}
+      <div class="content">
+        <p><strong>Comment:</strong> 
+          <em id="comme">{{ app.comments }}</em>
+        </p>
+      </div>
+      {% endif %}
+      
+      <div class="content">
+        <p>
+          <strong>Response to the application:</strong> 
+          <em id="response">{{ app.application_response|yesno:"Response recieved, No response recieved" }}</em>
+        </p>
+        <div>
+        {% if app.application_response %}
+          <p><strong>Response content:</strong>
+            <span id="response-content">{{ app.response_content }}</span></p>
+        {% endif %}
+        </div>
+
+        <br>
+        {% if app.cover_letter %}
+        <div>
+          <p><strong>Cover Letter:</strong>
+          <p>{{ app.cover_letter }}</p>
+        </div>
+        {% endif %} 
+      </div>
+    </div>
+    <footer class="card-footer">
+      <a id="show-edit" href="#" class="card-footer-item">
+        <span class="icon has-text-warning-dark">
+          <i class="fas fa-pencil-alt"></i></span>
+      </a>
+      <a id="show-delete" href="#" class="card-footer-item">
+        <span class="icon has-text-danger-dark">
+          <i class="fas fa-trash"></i></span>
+      </a>
+    </footer>
+  </div>
+</div>
+{% if app.attachment %}
+<div id="uloaded-files">
+  <object width="400px" height="400px" src="{{ app.attachment.url }}"></object>
+</div>
+{% endif %}
+
+{% include 'jboffer/forms/application_update_form.html'%}
+{% include 'jboffer/forms/application_confirm_delete.html' %}
+
+{% endblock %}
+
+{% block script%}
+  <script src="{% static 'jboffer/editform.js' %}"></script>
+  <script src="{% static 'jboffer/ajax.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+<div id="delete-form" class="column" style="display: none;">
+  <div class="card glass">
+    <header class="card-header has-text-centered">
+      <p class="card-header-title">Delete {{ app }}</p>
+      <a href="#" class="card-header-icon" aria-label="more options">
+        <span class="icon">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </a>
+    </header>
+    <form id="del-form" method="POST" data-href="{% url 'delete-app' app.id %}" action="">
+      {% csrf_token %}
+      <div class="card-content glass">
+        <div class="content">
+          <p>Are you sure you want to delete "{{ object }}"?</p>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <button id="confirm-form" class="button is-primary is-light card-footer-item" type="submit">
+          <span class="icon has-text-success-dark">
+            <i class="fas fa-check"></i></span><span>Confirm</span>
+        </button>
+        <button id="discard-delete" class="button is-danger is-light card-footer-item">
+          <span class="icon has-text-danger-dark">
+            <i class="fas fa-times"></i></span><span>Discard</span>
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
