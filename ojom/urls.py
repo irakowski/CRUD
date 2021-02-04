@@ -21,14 +21,14 @@ from jboffer import views as general_views
 
 urlpatterns = [
     path('', general_views.LandingPage.as_view(), name='landing-page'),     
-    path('application/new', general_views.CreateApplication.as_view(), name='create-application'),
-    path('application/<int:pk>', general_views.ViewApplication.as_view(), name='view-application'),
-    path('company/new', general_views.CreateCompany.as_view(), name='create-company'),
+    path('application/new/', general_views.CreateApplication.as_view(), name='create-application'),
+    path('application/<int:pk>/', general_views.ViewApplication.as_view(), name='view-application'),
+    path('company/new/', general_views.CreateCompany.as_view(), name='create-company'),
     path('companies/', general_views.CompanyListView.as_view(), name='company-list'),
-    path('offers', general_views.JobOfferListView.as_view(), name='job-offer-list'),
-    path('offer/<int:pk>',general_views.JobOfferDetailView.as_view(), name='view-offer'),
+    path('offers/', general_views.JobOfferListView.as_view(), name='job-offer-list'),
+    path('offer/<int:pk>/',general_views.JobOfferDetailView.as_view(), name='view-offer'),
     
-    path('application/<str:tag>', general_views.ApplicationsByTag.as_view(), name='app-tags'),
+    path('application/<str:tag>/', general_views.ApplicationsByTag.as_view(), name='app-tags'),
     path('stats/',general_views.Stats.as_view(), name='stats'),
 
     path('ajax/update/<int:pk>', general_views.ajax_update, name='update-app'),
