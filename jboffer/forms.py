@@ -6,6 +6,10 @@ class TagForm(forms.ModelForm):
    class Meta:
        model = models.ApplicationTag
        fields = ['name']
+       widgets = {
+          'name': forms.TextInput(attrs=
+                {'placeholder':'#python #backend'}),
+        }
 
 
 class ApplicationForm(forms.ModelForm):

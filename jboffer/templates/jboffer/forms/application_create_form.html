@@ -3,7 +3,9 @@
 
 {% block content %}
   <div class="column">
+      {% include 'jboffer/forms/form_errors.html' %}
     <div class="card glass">
+        
       <header class="card-header has-text-centered">
         <p class="card-header-title">
           Create Application
@@ -14,7 +16,7 @@
           </span>
         </a>
       </header>
-      <form method="POST" action="" enctype="multipart/form-data">
+      <form method="POST" action="" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         <div class="card-content glass">
           <div class="content">

@@ -69,11 +69,11 @@ class CreateApplication(generic.TemplateView):
         """
         Adding all forms for display on GET
         """
-        context = super().get_context_data(**kwargs)
-        context['form'] = forms.ApplicationForm()
-        context['tag_form'] = forms.TagForm()
-        context['offer_form'] = forms.OfferForm()
-        return context
+        if 'form' not in kwargs and 'tag_form' not in kwargs and 'offer_form' not in kwargs:
+            kwargs['form'] = forms.ApplicationForm()
+            kwargs['tag_form'] = forms.TagForm()
+            kwargs['offer_form'] = forms.OfferForm()
+        return super().get_context_data(**kwargs)
 
     def post(self, request, *args, **kwargs):
         """
@@ -93,7 +93,6 @@ class CreateApplication(generic.TemplateView):
             if app_type == 'ASSOC':
                 #get JobOffer Form with passed values
                 offer_form = forms.OfferForm(self.request.POST, self.request.FILES)
-                
                 if offer_form.is_valid():
                     return self.form_valid(form, tag_form, offer_form)
                 #return same view if form is invalid
@@ -101,7 +100,7 @@ class CreateApplication(generic.TemplateView):
             #sending valid ApplicationForm and TagForm to form_valid method for saving instances
             return self.form_valid(form, tag_form, offer_form=None)
         else:
-            return self.form_invalid(form, tag_form, offer_form)
+            return self.form_invalid(form, tag_form, offer_form=None)
 
     def form_valid(self, form, tag_form, offer_form):
         """If the form is valid, redirect to the supplied URL."""
@@ -130,7 +129,7 @@ class CreateApplication(generic.TemplateView):
         return HttpResponseRedirect(self.success_url)
 
     def form_invalid(self, form, tag_form, offer_form):
-        return self.render_to_response(self.get_context_data())
+        return self.render_to_response(self.get_context_data(form=form, tag_form=tag_form, offer_form=offer_form))
 
 
 class ApplicationsByTag(generic.View):

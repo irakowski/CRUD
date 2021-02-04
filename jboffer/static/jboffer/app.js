@@ -51,4 +51,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+    closeButtons = document.getElementsByClassName('delete');
+    
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(this.parentElement.parentElement)
+            this.parentElement.parentElement.style.display = 'none'
+        })
+      }
+
 });
