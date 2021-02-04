@@ -38,7 +38,7 @@ class MyApplication(models.Model):
     applied_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     applied_to = models.ForeignKey(Company, on_delete=models.CASCADE, default='Select a company name', null=True)
-    position = models.CharField(max_length=128, null=True, blank=True, default = None)
+    position = models.CharField(max_length=128)
     attachment = models.FileField(blank=True, upload_to='cv_uploads/')
     comments = models.CharField(max_length=255, blank=True)
     cover_letter = models.TextField(blank=True)
@@ -62,7 +62,7 @@ class JobOffer(models.Model):
     application = models.ForeignKey(MyApplication, on_delete=models.CASCADE, null=True)
     description = models.TextField(max_length=255, blank=True)
     snapshot = models.ImageField(upload_to='scrshots/', blank=True)
-    url = models.CharField(max_length=255, blank=True )
+    url = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return f'{self.application} AD'
