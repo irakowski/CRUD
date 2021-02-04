@@ -33,6 +33,7 @@
         </div>
       </div>
   </div><hr>
+  {% if apps %}
   <div class="has-text-centered">
       <p class="heading">Submitted Applications in the last 15 days</p>
       <hr>
@@ -43,5 +44,6 @@
       <br>
       {% endfor %}
   </div>
+  {% endif %}
 </div>
 {% endblock %}
