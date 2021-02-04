@@ -1,0 +1,48 @@
+{% if form.errors %}
+    <!-- Error messaging -->
+    <article class="message is-danger">
+        <div class="message-header glass">
+          <p>Could not submit this form. Please correct the following and submit again:</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body glass">
+        {% for field in form %}
+            {% if field.errors %}<li>Field: {{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+        {% endfor %}
+        </div>
+    </article>
+    <!-- /Error messaging -->
+{% endif %}
+
+{% if tag_form.errors %}
+    <!-- Error messaging -->
+    <article class="message is-danger">
+        <div class="message-header glass">
+          <p>Could not submit this form. Please correct the following and submit again:</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body glass">
+        {% for field in tag_form %}
+            {% if field.errors %}{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+        {% endfor %}
+        </div>
+    </article>
+    <!-- /Error messaging -->
+{% endif %}
+
+
+{% if offer_form.errors %}
+    <!-- Error messaging -->
+    <article class="message is-danger">
+        <div class="message-header glass">
+          <p>Could not submit this form. Please correct the following and submit again:</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body glass">
+        {% for field in offer_form %}
+            {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+        {% endfor %}
+        </div>
+    </article>
+    <!-- /Error messaging -->
+{% endif %}
